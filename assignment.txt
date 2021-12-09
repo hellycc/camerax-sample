@@ -1,0 +1,35 @@
+Refactor the given code base into a host "app" and an "sdk" module
+
+Host Application requirements
+1. On launch trigger the SDK flow
+2. After SDK flow is done, show the result with the gathered data in the TextView or ImageView as needed in the MainActivity
+3. In case happy path doesn’t happen (e.g. no text or face in picture) show feedback to the user and allow them to try again
+
+SDK requirements (Required)
+1. Take a picture of the person’s ID card side with the name
+    a. Extract all text you can and return them to the host app
+    b. Use ML Kit’s text recognition APIs
+2. Take a picture of the person
+    a. Verify only one person is included in the image and return the image to the host app
+    b. Use ML Kit`s Face detection APIs
+Bonus/Optional requirements
+1. Use Kotlin coroutines
+
+General requirements
+1. Write unit and integration tests for the SDK
+2. Use Kotlin and Android Camera APIs
+3. Basic UI/UX (UI/UX is not a hard assessment criteria for us)
+4. Use minSdkVersion 21 and latest targetSdkVersion
+5. Host code and documentation on Github or Bitbucket
+6. General code and SDK API documentation
+
+Assessment criteria
+1. Solution meets requirements without any bugs
+2. SDK code testability and test coverage
+3. SDK code quality and architecture
+4. Documentation quality
+
+Tips
+1. Don`t forget to initialize git as soon as you start working on the task
+2. Don`t spend time improving UI for the host app, feel free to make the sdk UI better though
+3. Feel free to use any addition libraries required
