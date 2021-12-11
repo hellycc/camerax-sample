@@ -33,7 +33,6 @@ build/
 .navigation
 /captures/
 output.json
-gradle.properties
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
