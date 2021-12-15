@@ -2,8 +2,8 @@ Refactor the given code base into a host "app" and an "sdk" module
 
 Host Application requirements
 1. On launch trigger the SDK flow
-2. After SDK flow is done, show the result with the gathered data in the TextView or ImageView as needed in the MainActivity
-3. In case happy path doesn’t happen (e.g. no text or face in picture) show feedback to the user and allow them to try again
+2. After SDK flow is done, show the result with the gathered "com.example.test" [renamed to com.castro.helena.camerax_demo] data in the TextView or ImageView as needed in the MainActivity
+3. In case happy path doesn't happen (e.g. no text or face in picture) show feedback to the user and allow them to try again
 
 SDK requirements (Required)
 1. Take a picture of the person’s ID card side with the name

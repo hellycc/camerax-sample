@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "472010673192",
+    "project_id": "camerax-demo-dec2021",
+    "storage_bucket": "camerax-demo-dec2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472010673192:android:de91d3e938dea87476791d",
+        "android_client_info": {
+          "package_name": "com.castro.helena.camerax_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472010673192-imtokicqcn1tnd70hm0vv4smqht07c0p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpau0TOxED8K1AXKKt_sV-T0cN-pc2Mzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472010673192-imtokicqcn1tnd70hm0vv4smqht07c0p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
