@@ -22,7 +22,7 @@
         <!-- To use multiple models: android:value="ocr,model2,model3" -->
 
         <activity
-            android:name="com.castro.helena.camerax_demo.presentation.MainActivity"
+            android:name="com.castro.helena.camerax_demo.presentation.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

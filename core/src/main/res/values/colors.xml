@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="neptune">#70a4b4</color>
+    <color name="niagara">#099e99</color>
+    <color name="tealBlue">#044c63</color>
+
+    <color name="blue_900">#0d47a1</color>
+    <color name="blue_light">#5472d3</color>
+    <color name="blue_dark">#002171</color>
+
+</resources>

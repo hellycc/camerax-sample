@@ -47,15 +47,16 @@ dependencies {
 
     // Libraries which can be re-used in other modules should use the `api` keyword.
     // This way they can be shared with dependent feature modules.
-
     api 'androidx.appcompat:appcompat:1.4.0'
     api 'androidx.constraintlayout:constraintlayout:2.1.2'
     api 'com.google.android.material:material:1.4.0'
 
+    // Navigation
     api "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
     api "androidx.navigation:navigation-ui-ktx:$versions.navigation"
     api "androidx.navigation:navigation-dynamic-features-fragment:$versions.navigation"
 
+    // Tests
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

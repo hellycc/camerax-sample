@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.CameraActivity">
+    tools:context=".presentation.camera.CameraFragment">
 
     <Button
         android:id="@+id/camera_capture_button"
@@ -13,7 +13,7 @@
         android:layout_marginBottom="50dp"
         android:elevation="2dp"
         android:scaleType="fitCenter"
-        android:text="Take Photo"
+        android:text="@string/camera_button_label_take_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -22,6 +22,5 @@
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

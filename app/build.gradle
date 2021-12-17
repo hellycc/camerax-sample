@@ -45,11 +45,11 @@ android {
         abortOnError false
     }
 
-//    dynamicFeatures = [':feature_cameraX']
 }
 
 dependencies {
     implementation(project(path: ':core'))
+    implementation(project(path: ':feature_cameraX'))
 
     implementation "com.google.android.play:core:1.10.2"
     implementation "com.google.android.play:core-ktx:${versions.playCoreKtx}"
@@ -60,6 +60,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:29.0.2')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 }
 apply plugin: 'com.google.gms.google-services'
