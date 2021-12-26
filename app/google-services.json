@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "472010673192",
-    "project_id": "camerax-demo-dec2021",
-    "storage_bucket": "camerax-demo-dec2021.appspot.com"
+    "project_number": "329858589324",
+    "project_id": "camerax-sample-december-2021",
+    "storage_bucket": "camerax-sample-december-2021.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:472010673192:android:de91d3e938dea87476791d",
+        "mobilesdk_app_id": "1:329858589324:android:fa5151435650bd4ccbd1a9",
         "android_client_info": {
-          "package_name": "com.castro.helena.camerax_demo"
+          "package_name": "com.castro.helena.camerax_sample"
         }
       },
       "oauth_client": [
         {
-          "client_id": "472010673192-imtokicqcn1tnd70hm0vv4smqht07c0p.apps.googleusercontent.com",
+          "client_id": "329858589324-5d1909g16df4ka41cm2ia8ru8p5fr8fm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDpau0TOxED8K1AXKKt_sV-T0cN-pc2Mzo"
+          "current_key": "AIzaSyCUzwyxZHqnmQFnHQCvCfuRutkDyngFmoE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "472010673192-imtokicqcn1tnd70hm0vv4smqht07c0p.apps.googleusercontent.com",
+              "client_id": "329858589324-5d1909g16df4ka41cm2ia8ru8p5fr8fm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

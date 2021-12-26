@@ -1,11 +1,10 @@
-package com.castro.helena.camerax_demo.presentation.main
+package com.castro.helena.camerax_sample.presentation.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
-import com.castro.helena.camerax_demo.R
-import com.castro.helena.camerax_demo.databinding.ActivityMainBinding
+import com.castro.helena.camerax_sample.R
+import com.castro.helena.camerax_sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,8 +21,7 @@ class MainActivity : AppCompatActivity() {
     private fun setViews() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.home_fragment_container_view) as NavHostFragment
-        val navController = navHostFragment.navController
-        binding.bottomNavigation.setupWithNavController(navController)
+        navHostFragment.navController
     }
 
 }

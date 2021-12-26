@@ -5,15 +5,13 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,29 +23,27 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import java.io.File
+import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class CameraFragment : Fragment(R.layout.fragment_camera), CameraContract.View {
+class CameraFragment : Fragment(R.layout.fragment_camera) {
 
     val binding by viewLifecycleAware { FragmentCameraBinding.bind(requireView()) }
 
     private var imageCapture: ImageCapture? = null
-
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.run {
-            findViewById<Button>(R.id.camera_capture_button).setOnClickListener {
-                outputDirectory = getOutputDirectory()
-                cameraExecutor = Executors.newSingleThreadExecutor()
-                takePhoto()
-            }
-        }
         requestCameraPermissions()
+
+        binding.cameraCaptureButton.setOnClickListener { takePhoto() }
+
+        outputDirectory = getOutputDirectory()
+        cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
     private fun requestCameraPermissions() {
@@ -126,6 +122,20 @@ class CameraFragment : Fragment(R.layout.fragment_camera), CameraContract.View {
             imageCapture = ImageCapture.Builder()
                 .build()
 
+            val imageAnalyzer = ImageAnalysis.Builder()
+                .build()
+                .also {
+                    it.setAnalyzer(cameraExecutor, CustomImageAnalyzer().apply {
+                        setOnLumaListener(object: CustomImageAnalyzer.LumaListener {
+                            override fun setOnLumaListener(average: Double) {
+                                run {
+
+                                }
+                            }
+                        })
+                    })
+                }
+
             // Select back camera as a default
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
@@ -134,9 +144,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera), CameraContract.View {
                 cameraProvider.unbindAll()
 
                 // Bind use cases to camera
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture
-                )
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalyzer)
 
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
@@ -163,10 +171,42 @@ class CameraFragment : Fragment(R.layout.fragment_camera), CameraContract.View {
     }
 
     companion object {
-        private const val TAG = "CameraXBasic"
+        private const val TAG = "CameraX_Sample"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    }
+
+    private class CustomImageAnalyzer() : ImageAnalysis.Analyzer {
+
+        private lateinit var mListener: LumaListener
+
+        private fun ByteBuffer.toByteArray() : ByteArray {
+            rewind()
+            val data = ByteArray(remaining())
+            get(data)
+            return data
+        }
+
+        override fun analyze(image: ImageProxy) {
+            val buffer = image.planes[0].buffer
+            val data = buffer.toByteArray()
+            val pixels = data.map { it.toInt() and 0xFF }
+            val average = pixels.average()
+
+            mListener.setOnLumaListener(average)
+
+            image.close()
+        }
+
+        interface LumaListener {
+            fun setOnLumaListener(average: Double)
+        }
+
+        fun setOnLumaListener(mListener: LumaListener) {
+            this.mListener = mListener
+        }
+
     }
 
 }

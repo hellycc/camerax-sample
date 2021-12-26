@@ -1,4 +1,4 @@
-rootProject.name = "CameraX Demo"
+rootProject.name = "CameraX Sample"
 include ':app'
-include ':feature_cameraX'
+include ':sdk'
 include ':core'

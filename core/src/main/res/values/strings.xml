@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CameraX Demo</string>
+    <string name="app_name">CameraX Sample</string>
 
     <string name="nav_menu_home">Home</string>
 
@@ -11,4 +11,6 @@
     <string name="camera_button_label_take_photo">Take Photo</string>
 
     <string name="label_photo_preview">Photo preview</string>
+
+    <string name="label_capture">Capture</string>
 </resources>

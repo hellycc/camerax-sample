@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.castro.helena.camerax_demo"
+        applicationId "com.castro.helena.camerax_sample"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode 1
@@ -49,7 +49,7 @@ android {
 
 dependencies {
     implementation(project(path: ':core'))
-    implementation(project(path: ':feature_cameraX'))
+    implementation(project(path: ':sdk'))
 
     implementation "com.google.android.play:core:1.10.2"
     implementation "com.google.android.play:core-ktx:${versions.playCoreKtx}"
@@ -58,7 +58,7 @@ dependencies {
 
     implementation "androidx.multidex:multidex:${versions.multiDex}"
 
-    implementation platform('com.google.firebase:firebase-bom:29.0.2')
+    implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 

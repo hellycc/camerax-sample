@@ -1,13 +1,13 @@
-package com.castro.helena.camerax_demo.presentation.home
+package com.castro.helena.camerax_sample.presentation.home
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.castro.helena.camerax_demo.R
+import com.castro.helena.camerax_sample.R
 
-class HomeFragment : Fragment(R.layout.fragment_home), HomeContract.View {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
