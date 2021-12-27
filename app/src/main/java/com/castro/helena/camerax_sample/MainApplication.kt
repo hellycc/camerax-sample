@@ -7,7 +7,7 @@ import androidx.multidex.MultiDexApplication
 class MainApplication : MultiDexApplication(), CameraXConfig.Provider {
 
     override fun getCameraXConfig(): CameraXConfig {
-        return CameraXConfig.Builder.fromConfig(Camera2Config.defaultConfig()).build()
+        return Camera2Config.defaultConfig()
     }
 
 }

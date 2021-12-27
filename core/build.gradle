@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'androidx.navigation.safeargs'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -57,14 +57,14 @@ dependencies {
     api "androidx.navigation:navigation-ui-ktx:$versions.navigation"
 
     // CameraX Core
-    def camerax_version = "1.0.0"
+    def camerax_version = "1.0.2"
     api "androidx.camera:camera-core:$camerax_version"
     // CameraX core library using camera2 implementation
     api "androidx.camera:camera-camera2:$camerax_version"
     // CameraX Lifecycle Library
     api "androidx.camera:camera-lifecycle:$camerax_version"
     // CameraX View class
-    api "androidx.camera:camera-view:1.0.0-alpha25"
+    api "androidx.camera:camera-view:1.0.0-alpha32"
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

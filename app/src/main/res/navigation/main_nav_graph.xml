@@ -17,11 +17,15 @@
 
     </fragment>
 
-
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.castro.helena.feature_cameraX.presentation.camera.CameraFragment"
         android:label="CameraFragment"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera">
+        <argument
+            android:name="isFrontCamera"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
 
 </navigation>

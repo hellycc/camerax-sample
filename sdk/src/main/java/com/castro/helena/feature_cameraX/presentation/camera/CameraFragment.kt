@@ -16,6 +16,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import com.castro.helena.core.utils.viewLifecycleAware
 import com.castro.helena.feature_cameraX.R
 import com.castro.helena.feature_cameraX.databinding.FragmentCameraBinding
@@ -28,13 +29,26 @@ import java.text.SimpleDateFormat
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+const val IS_FRONT_CAMERA = "isFrontCamera"
+
 class CameraFragment : Fragment(R.layout.fragment_camera) {
+
+    var isCameraFacingFront: Boolean = false
 
     val binding by viewLifecycleAware { FragmentCameraBinding.bind(requireView()) }
 
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        isCameraFacingFront = arguments?.getBoolean(IS_FRONT_CAMERA) as Boolean
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +62,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
 
     private fun requestCameraPermissions() {
         if (allPermissionsGranted()) {
-            startCamera()
+            startCamera(isCameraFacingFront)
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
@@ -105,46 +119,59 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
             })
     }
 
-    private fun startCamera() {
+    private fun startCamera(isFrontCamera: Boolean) {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener(Runnable {
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            // Preview
+            // Preview use case
             val preview = Preview.Builder()
                 .build()
                 .also {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
+            // ImageCaputre use case
             imageCapture = ImageCapture.Builder()
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 .build()
 
+            // ImageAnalysis use case
             val imageAnalyzer = ImageAnalysis.Builder()
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, CustomImageAnalyzer().apply {
-                        setOnLumaListener(object: CustomImageAnalyzer.LumaListener {
+                        setOnLumaListener(object : CustomImageAnalyzer.LumaListener {
                             override fun setOnLumaListener(average: Double) {
                                 run {
-
+                                    // TODO something...
                                 }
                             }
                         })
                     })
                 }
 
-            // Select back camera as a default
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            // Camera selector switch front and back cameras
+            val cameraSelector = if (isFrontCamera) {
+                CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build()
+            } else {
+                CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
+            }
 
             try {
                 // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
 
                 // Bind use cases to camera
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalyzer)
+                cameraProvider.bindToLifecycle(
+                    this as LifecycleOwner,
+                    cameraSelector,
+                    preview,
+                    imageCapture,
+                    imageAnalyzer
+                )
 
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
@@ -181,7 +208,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
 
         private lateinit var mListener: LumaListener
 
-        private fun ByteBuffer.toByteArray() : ByteArray {
+        private fun ByteBuffer.toByteArray(): ByteArray {
             rewind()
             val data = ByteArray(remaining())
             get(data)
